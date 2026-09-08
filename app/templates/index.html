@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Minhas Tarefas{% endblock %}
+
+{% block content %}
+<div class="app-shell">
+    <header class="topbar">
+        <h1>📋 Minhas Tarefas</h1>
+        <div class="topbar-right">
+            <span>Olá, {{ user.name }}</span>
+            <a href="{{ url_for('auth.logout') }}" class="btn-ghost">Sair</a>
+        </div>
+    </header>
+
+    <main class="content">
+        <form id="task-form" class="task-form">
+            <div class="task-form-row">
+                <input type="text" id="title" placeholder="Digitar nova tarefa" required>
+                <input type="date" id="due_date">
+                <select id="priority">
+                    <option value="baixa">Baixa</option>
+                    <option value="media" selected>Média</option>
+                    <option value="alta">Alta</option>
+                </select>
+                <button type="submit" class="btn-primary">Adicionar</button>
+            </div>
+            <textarea id="description" placeholder="Descrição (opcional)" rows="2"></textarea>
+        </form>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="todas">Todas</button>
+            <button class="filter-btn" data-filter="pendente">Pendentes</button>
+            <button class="filter-btn" data-filter="concluida">Concluídas</button>
+        </div>
+
+        <ul id="task-list" class="task-list"></ul>
+
+        <p id="empty-state" class="empty-state" hidden>Nenhuma tarefa por aqui ainda.</p>
+    </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
